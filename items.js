@@ -1,5 +1,5 @@
 /* Represents an item in the to-do list. */
-class Item {
+export class Item {
     /*
      * Creates an instance of Item.
      * @constructor
@@ -40,7 +40,7 @@ class Item {
      * @returns {Date} The date the item was created.
      */
     getDateCreated() {
-        return this.dateCreated;
+        return this.formatDate(this.dateCreated);
     }
 
     /*
@@ -48,7 +48,7 @@ class Item {
      * @returns {Date} The due date of the item.
      */
     getDateDue() {
-        return this.dateDue;
+        return this.formatDate(this.dateDue);
     }
 
     /*
@@ -64,7 +64,7 @@ class Item {
      * @returns {string} The status of the item.
      */
     getStatus() {
-        this.setStatus();
+        this.updateStatus();
         return this.status;
     }
 
@@ -97,17 +97,33 @@ class Item {
     }
 
     /*
-     * Sets the status of the item based on the current date and the due date. Assumes that the status is "New" when the item is created.
-     * If the current date is before the due date, the status is "Working on".
-     * If the current date is after the due date, the status is "Finished".
+     * Starts the task by setting the status to "Working on".
      */
-    setStatus() {
-        const now = new Date();
-        if (this.dateDue > now) {
+    startTask() {
+        if (this.status === "New") {
             this.status = "Working on";
-        } else if (this.dateDue <= now) {
+        }
+    }
+
+    /*
+     * Updates the status of the item to "Finished" based on the due date.
+     */
+    updateStatus() {
+        const now = new Date();
+        if (this.dateDue <= now) {
             this.status = "Finished";
         }
+    }
+
+    /*
+     * Returns a string representation of the date.
+     * @returns {string} A string representation of the date.
+     */
+    formatDate(date) {
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, "0");
+        const dd = String(date.getDate()).padStart(2, "0");
+        return `${yyyy}-${mm}-${dd}`;
     }
 }
 

@@ -74,7 +74,7 @@ class ToDo {
 
     /* Prints the to-do list to the console. */
     printList() {
-        console.log("***To Do List***\n");
+        console.log("---To Do List---");
         this.toDo.forEach((item, index) => {
             console.log(`Item ${index + 1}:`);
             console.log(`Title: ${item.getTitle()}`);
@@ -86,4 +86,59 @@ class ToDo {
             console.log("---");
         });
     }
+
+    /* Starts a task by setting its status to "Working on".
+     * @param {Item} item The item to start.
+     */
+    startTask(item) {
+        if (this.toDo.includes(item)) {
+            item.startTask(); // call the Item method
+        } else {
+            console.log("Item not found in the list.");
+        }
+    }
 }
+
+// === Create ToDo list ===
+const myList = new ToDo();
+
+// === Create Items ===
+const task1 = new Item("Finish project", "Implement DB logic", "2025-11-05");
+const task2 = new Item("Clean room", "Organize desk", "2025-10-30");
+const task3 = new Item("Read book", "Read chapter 5", "2025-11-01");
+
+// === Add Items ===
+myList.addNew(task1);
+myList.addNew(task2);
+myList.addNew(task3);
+
+// === Print initial list ===
+console.log("\n--- Initial List ---");
+myList.printList();
+
+// === Edit items ===
+myList.editItem(task1, "title", "Finish JS project");
+myList.editItem(task2, "description", "Organize and clean desk thoroughly");
+myList.editItem(task3, "dateDue", "2025-11-03");
+myList.startTask(task1);
+myList.startTask(task2);
+
+// === Print updated list ===
+console.log("\n--- After Editing ---");
+myList.printList();
+
+// === Reorganize ===
+myList.reOrganize(2, 0); // Move last item to the top
+console.log("\n--- After Reorganizing ---");
+myList.printList();
+
+// === Remove item ===
+myList.remove(task2);
+console.log("\n--- After Removing Task 2 ---");
+myList.printList();
+
+// === Test past due status ===
+const oldTask = new Item("Past task", "Overdue test", "2024-01-01");
+myList.addNew(oldTask);
+console.log("\n--- After Adding Past Due Task ---");
+myList.printList();
