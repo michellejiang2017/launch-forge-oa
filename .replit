@@ -1,6 +1,37 @@
-modules = ["nodejs-20", "python-3.12"]
+modules = ["nodejs-20", "python-3.11"]
 [agent]
 expertMode = true
 
 [nix]
 channel = "stable-25_05"
+
+# .replit
+run = "npm start"
+
+[env]
+NODE_ENV = "development"
+
+[workflows]
+test = "npm test"
+deploy = "npm run deploy"
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Coding Challenges"
+
+[[workflows.workflow]]
+name = "Run Coding Challenges"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node yeehaw.js"
+
+[workflows.workflow.metadata]
+outputType = "console"
