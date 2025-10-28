@@ -18,7 +18,7 @@ class items {
     
 
     function setStatus(dateCreated, dateDue) { 
-        // when this function is called the 
+        // when this function is called it automatically assumes that it is no longer new
         if (dateDue > dateCreated) { 
             this.status = "Working on"; 
         } else if (dateDue <= dateCreated) {
