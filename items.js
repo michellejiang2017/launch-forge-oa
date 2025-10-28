@@ -60,7 +60,7 @@ class Item {
      * @returns {number} The number of days left until the item is due.
      */
     getDaysLeft() {
-        return Math.ceil(this.dateDue - new Date() / (1000 * 60 * 60 * 24));
+        return Math.ceil((this.dateDue - new Date()) / (1000 * 60 * 60 * 24));
     }
 
     /*
@@ -97,7 +97,7 @@ class Item {
         if (isNaN(testDate.getTime())) {
             throw new Error("Invalid date format. Please use YYYY-MM-DD.");
         }
-        this.dateDue = dateDue;
+        this.dateDue = new Date(dateDue);
     }
 
     /*
@@ -114,3 +114,25 @@ class Item {
         }
     }
 }
+
+// === TEST CASES ===
+
+// Create a valid item
+const task1 = new Item(
+    "Finish project",
+    "Implement database logic",
+    "2025-11-05",
+);
+
+console.log("🟢 Task 1 created:", task1);
+console.log("Days left:", task1.getDaysLeft());
+console.log("Current status:", task1.getStatus());
+
+// Update title and due date
+task1.setTitle("Finish JS project");
+task1.setDateDue("2025-11-10");
+console.log("\n🟢 Updated Task 1:", task1);
+
+// test due date in the past
+const oldTask = new Item("Past due test", "Check overdue logic", "2024-01-01");
+console.log("\nPast due status:", oldTask.getStatus());

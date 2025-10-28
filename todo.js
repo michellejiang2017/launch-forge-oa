@@ -14,14 +14,14 @@ The ability to edit information about each task where appropriate
 Any additional functionality you can think of is highly encouraged, but keep in mind the to do list is supposed to be simple.
 */
 
-// import { items } from './items.js';
+import { Item } from './items.js';
 
 class ToDo {
     constructor() {
         this.toDo = []; //list of to do items
     }
 
-    addNew(item) {
+    addNew(items.Item) {
         // const newItem = new items(title, description, dateDue);
         // this.toDo.push(newItem);
     }
