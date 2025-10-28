@@ -1,60 +1,116 @@
-class items { 
+/*
+ * Represents an item in the to-do list.
+ * @class
+ */
+// The thing is you lowkey didn't make the attributes private...so like what's the point of using getters and setters...
+class Item {
     /*
-    let title = ""; 
-    let description = ""; 
-    let dateCreated = ""; //should it be a string? 
-    let dateDue = ""; 
-    let statusList = ["New", "Working on", "Finished"]; // maybe it can be a list or like a selection? 
-    let status = statusList[0]; */
-
-    constructor(title, description, dateDue) { 
-        this.title = title; 
-        this.description = description; 
-        this.dateCreated = new Date(); 
-        //if dateDue = regex
-        this.dateDue = new Date(dateDue); 
-        this.status = "New"; 
-    }
-    
-
-    setStatus(dateCreated, dateDue) { 
-        // when this function is called it automatically assumes that it is no longer new
-        if (dateDue > dateCreated) { 
-            this.status = "Working on"; 
-        } else if (dateDue <= dateCreated) {
-            this.status = "Finished"
+     * Creates an instance of Item.
+     * @constructor
+     * @param {string} title The title of the item.
+     * @param {string} description The description of the item.
+     * @param {Date} dateDue The due date of the item.
+     */
+    constructor(title, description, dateDue) {
+        this.title = title;
+        this.description = description;
+        this.dateCreated = new Date();
+        const testDate = new Date(dateDue);
+        if (isNaN(testDate.getTime())) {
+            throw new Error("Invalid date format. Please use YYYY-MM-DD.");
         }
+        this.dateDue = testDate;
+        this.status = "New";
     }
 
-    getTitle() { 
+    /*
+     * Returns the title of the item.
+     * @returns {string} The title of the item.
+     */
+    getTitle() {
         return this.title;
     }
 
-    getDescription() { 
+    /*
+     * Returns the description of the item.
+     * @returns {string} The description of the item.
+     */
+    getDescription() {
         return this.description;
     }
 
-    getDateCreated() { 
+    /*
+     * Returns the date the item was created.
+     * @returns {Date} The date the item was created.
+     */
+    getDateCreated() {
         return this.dateCreated;
     }
 
-    getDateDue() { 
+    /*
+     * Returns the due date of the item.
+     * @returns {Date} The due date of the item.
+     */
+    getDateDue() {
         return this.dateDue;
     }
 
-    daysLeft() { 
-        return this.dateDue - this.dateCreated;
+    /*
+     * Returns the number of days left until the item is due.
+     * @returns {number} The number of days left until the item is due.
+     */
+    getDaysLeft() {
+        return Math.ceil(this.dateDue - new Date() / (1000 * 60 * 60 * 24));
     }
-    
-    getStatus() { 
+
+    /*
+     * Returns the status of the item.
+     * @returns {string} The status of the item.
+     */
+    getStatus() {
+        this.setStatus();
         return this.status;
     }
 
-    setTitle(title) { 
+    /*
+     * Sets the title of the item.
+     * @param {string} title The new title of the item.
+     */
+    setTitle(title) {
         this.title = title;
     }
 
-    // setters for everything 
+    /*
+     * Sets the description of the item.
+     * @param {string} description The new description of the item.
+     */
+    setDescription(description) {
+        this.description = description;
+    }
 
-    // constructor that sets everything? 
+    /*
+     * Sets the due date of the item.
+     * @param {Date} dateDue The new due date of the item.
+     */
+    setDateDue(dateDue) {
+        const testDate = new Date(dateDue);
+        if (isNaN(testDate.getTime())) {
+            throw new Error("Invalid date format. Please use YYYY-MM-DD.");
+        }
+        this.dateDue = dateDue;
+    }
+
+    /*
+     * Sets the status of the item based on the current date and the due date. Assumes that the status is "New" when the item is created.
+     * If the current date is before the due date, the status is "Working on".
+     * If the current date is after the due date, the status is "Finished".
+     */
+    setStatus() {
+        const now = new Date();
+        if (this.dateDue > now) {
+            this.status = "Working on";
+        } else if (this.dateDue <= now) {
+            this.status = "Finished";
+        }
+    }
 }

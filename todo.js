@@ -14,34 +14,37 @@ The ability to edit information about each task where appropriate
 Any additional functionality you can think of is highly encouraged, but keep in mind the to do list is supposed to be simple.
 */
 
-// import { items } from './items.js'; 
+// import { items } from './items.js';
 
-class todo { 
-
+class ToDo {
     constructor() {
         this.toDo = []; //list of to do items
     }
 
-    addNew(title, description, dateDue) { 
+    addNew(item) {
         // const newItem = new items(title, description, dateDue);
         // this.toDo.push(newItem);
     }
-    
-    remove(index) { 
+
+    remove(index) {
         if (index >= 0 && index < this.toDo.length) {
             this.toDo.splice(index, 1);
         }
     }
 
-    reorganize(fromIndex, toIndex) { 
-        if (fromIndex >= 0 && fromIndex < this.toDo.length && 
-            toIndex >= 0 && toIndex < this.toDo.length) {
+    reorganize(fromIndex, toIndex) {
+        if (
+            fromIndex >= 0 &&
+            fromIndex < this.toDo.length &&
+            toIndex >= 0 &&
+            toIndex < this.toDo.length
+        ) {
             const item = this.toDo.splice(fromIndex, 1)[0];
             this.toDo.splice(toIndex, 0, item);
         }
     }
 
-    editItem(index, property, value) { 
+    editItem(index, property, value) {
         if (index >= 0 && index < this.toDo.length) {
             this.toDo[index][property] = value;
         }
