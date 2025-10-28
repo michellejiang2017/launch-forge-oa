@@ -17,7 +17,7 @@ class items {
     }
     
 
-    function setStatus(dateCreated, dateDue) { 
+    setStatus(dateCreated, dateDue) { 
         // when this function is called it automatically assumes that it is no longer new
         if (dateDue > dateCreated) { 
             this.status = "Working on"; 
@@ -26,31 +26,32 @@ class items {
         }
     }
 
-    function getTitle() { 
-
+    getTitle() { 
+        return this.title;
     }
 
-    function getDescription() { 
-
+    getDescription() { 
+        return this.description;
     }
 
-    function getDateCreated() { 
-
+    getDateCreated() { 
+        return this.dateCreated;
     }
 
-    function getDateDue() { 
-
+    getDateDue() { 
+        return this.dateDue;
     }
 
-    function daysLeft() { 
-        getDateDue - getDateCreated //something like that 
+    daysLeft() { 
+        return this.dateDue - this.dateCreated;
     }
-    function getStatus() { 
-
+    
+    getStatus() { 
+        return this.status;
     }
 
-    function setTitle() { 
-
+    setTitle(title) { 
+        this.title = title;
     }
 
     // setters for everything 
