@@ -1,8 +1,4 @@
-/*
- * Represents an item in the to-do list.
- * @class
- */
-// The thing is you lowkey didn't make the attributes private...so like what's the point of using getters and setters...
+/* Represents an item in the to-do list. */
 class Item {
     /*
      * Creates an instance of Item.
